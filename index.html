@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Literadia</title>
+  <title>Deshawn Yeovanes - Personal Portfolio</title>
   <style>
     :root {
       --primary: #1DB954;
-      --accent: #191414;
-      --light: #ffffff;
-      --dark: #191414;
+      --accent: #3A3A3A;
+      --light: #2C2C2C;
+      --dark: #F5F5DC;
+      --crimson: #DC143C;
+      --soft-blush: #FFB6C1;
     }
 
     * {
@@ -20,14 +22,18 @@
     }
 
     body {
-      background-color: var(--dark);
-      color: var(--light);
+      background: linear-gradient(135deg, var(--crimson) 0%, #E85A4F 25%, var(--soft-blush) 60%, #FFD3E1 100%);
+      color: #2C2C2C;
+      min-height: 100vh;
     }
 
     header {
-      background-color: var(--accent);
+      background: rgba(220, 20, 60, 0.15);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
       padding: 1rem 2rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 20px rgba(220, 20, 60, 0.1);
       position: fixed;
       width: 100%;
       top: 0;
@@ -43,7 +49,7 @@
     }
 
     .site-title {
-      color: var(--primary);
+      color: #FFFFFF;
       font-size: 1.8rem;
       font-weight: bold;
       letter-spacing: 1px;
@@ -55,19 +61,19 @@
     }
 
     .nav-link {
-      color: var(--light);
+      color: #FFFFFF;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     .nav-link:hover {
-      color: var(--primary);
+      color: #DC143C;
     }
 
     main {
       padding-top: 80px;
-      background: linear-gradient(180deg, var(--dark) 0%, #2a2a2a 100%);
     }
 
     .profile-section {
@@ -77,11 +83,15 @@
     }
 
     .bio-content {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
       padding: 2rem;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease;
+      border-radius: 25px;
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
       display: grid;
       grid-template-columns: 1fr 260px;
       gap: 2rem;
@@ -89,11 +99,13 @@
     }
 
     .bio-content:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.4);
     }
 
     .bio-text h1 {
-      color: var(--primary);
+      color: #FFFFFF;
       margin-bottom: 1rem;
       font-size: 2.5rem;
     }
@@ -101,6 +113,15 @@
     .bio-details {
       margin: 1.5rem 0;
       line-height: 1.6;
+      color: #2C2C2C;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1.5rem;
+      border-radius: 20px;
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(220, 20, 60, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .social-links {
@@ -113,16 +134,21 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      color: var(--light);
+      color: #2C2C2C;
       text-decoration: none;
       padding: 0.8rem 1.5rem;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 35px rgba(220, 20, 60, 0.1);
       transition: all 0.3s ease;
     }
 
     .social-links a:hover {
       background: var(--primary);
+      color: white;
       transform: translateX(10px);
     }
 
@@ -133,15 +159,22 @@
 
     .spotify-embed {
       margin-top: 2rem;
-      border-radius: 12px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      padding: 10px;
     }
 
     .spotify-embed iframe {
       width: 100%;
       height: 152px;
       border-radius: 12px;
+      border: none;
     }
 
     .container {
@@ -154,7 +187,7 @@
       border-radius: 16px;
       overflow: hidden;
       background-color: white;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 20px rgba(54, 69, 79, 0.3);
       transform-style: preserve-3d;
       transition: transform 0.05s linear;
       cursor: grab;
@@ -166,6 +199,70 @@
       object-fit: cover;
     }
 
+    .achievements-section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .achievements-section h2 {
+      color: #DC143C;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .achievements-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .achievement-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 25px;
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .achievement-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .achievement-item h3 {
+      color: #DC143C;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .achievement-item p {
+      color: #2C2C2C;
+      line-height: 1.5;
+    }
+
+    .achievement-year {
+      background: rgba(29, 185, 84, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+    }
+
     .photo-gallery {
       padding: 3rem 2rem;
       max-width: 1200px;
@@ -173,7 +270,7 @@
     }
 
     .photo-gallery h2 {
-      color: var(--primary);
+      color: #DC143C;
       font-size: 2rem;
       text-align: center;
       margin-bottom: 2rem;
@@ -181,28 +278,32 @@
 
     .photo-grid {
       display: grid;
-      gap: 2rem;
+      gap: 1.5rem;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .photo-item {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .photo-item:hover {
+      transform: scale(1.02) translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.4);
     }
 
     .photo-item img {
       width: 100%;
-      height: 200px;
+      height: 250px;
       object-fit: cover;
-    }
-
-    .photo-caption {
-      padding: 1rem;
-      text-align: center;
-      font-size: 1rem;
-      color: var(--light);
     }
 
     @media (max-width: 768px) {
@@ -215,6 +316,10 @@
         margin-left: auto;
         margin-right: auto;
       }
+
+      .nav-links {
+        gap: 1rem;
+      }
     }
   </style>
 </head>
@@ -224,6 +329,7 @@
       <span class="site-title">Deshawn</span>
       <div class="nav-links">
         <a href="#bio" class="nav-link">Bio</a>
+        <a href="#achievements" class="nav-link">Achievements</a>
         <a href="#contact" class="nav-link">Contact</a>
         <a href="#photo" class="nav-link">Photo</a>
       </div>
@@ -234,7 +340,7 @@
     <section id="bio" class="profile-section">
       <div class="bio-content">
         <div class="bio-text">
-          <h1>Deshawn Yeovanes</h1>
+          <h1>Bio Details</h1>
           <p class="bio-details">
             Halo! Saya Deshawn Yeovanes, umur saya 15 tahun. Cita-cita Saya di masa depan yaitu membantu banyak orang dan ingin hidup dengan kebebasan.<br>
             Lahir: Batam, 22 Maret 2010<br>
@@ -262,11 +368,47 @@
           </div>
         </div>
 
-              <!-- Photocard in same box -->
+        <!-- Photocard in same box -->
         <div class="container">
           <div class="photocard" id="photocard3D">
             <img src="IMG-20250802-WA0001.jpg" alt="Deshawn Photocard">
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="achievements-section">
+      <h2>My Achievements</h2>
+      <div class="achievements-grid">
+        <div class="achievement-item">
+          <span class="achievement-year">2024</span>
+          <h3>Reading Challenge Champion</h3>
+          <p>Successfully completed reading 50 books in one year, covering various genres from mystery to science fiction.</p>
+        </div>
+        <div class="achievement-item">
+          <span class="achievement-year">2023</span>
+          <h3>School Literature Competition</h3>
+          <p>Won 2nd place in the inter-school literature quiz competition, demonstrating deep knowledge of Indonesian and world literature.</p>
+        </div>
+        <div class="achievement-item">
+          <span class="achievement-year">2023</span>
+          <h3>Cycling Marathon</h3>
+          <p>Completed a 50km cycling marathon around Batam, promoting healthy lifestyle and environmental awareness.</p>
+        </div>
+        <div class="achievement-item">
+          <span class="achievement-year">2022</span>
+          <h3>Young Writer Award</h3>
+          <p>Published a short story in the school magazine and received recognition for creative writing skills.</p>
+        </div>
+        <div class="achievement-item">
+          <span class="achievement-year">2022</span>
+          <h3>Community Book Drive</h3>
+          <p>Organized a book donation drive that collected over 200 books for underprivileged children in the community.</p>
+        </div>
+        <div class="achievement-item">
+          <span class="achievement-year">2021</span>
+          <h3>Reading Mentor</h3>
+          <p>Volunteered as a reading mentor for younger students, helping them develop their reading comprehension skills.</p>
         </div>
       </div>
     </section>
@@ -276,19 +418,21 @@
       <div class="photo-grid">
         <div class="photo-item">
           <img src="photocard1.jpg" alt="Reading Journey">
-          <div class="photo-caption">Started my reading adventure at age 5 with fairy tales</div>
         </div>
         <div class="photo-item">
           <img src="photocard2.jpg" alt="Favorite Genre">
-          <div class="photo-caption">Mystery and Fantasy books have my heart</div>
         </div>
         <div class="photo-item">
           <img src="photocard3.jpg" alt="Reading Corner">
-          <div class="photo-caption">My cozy spot for endless adventures</div>
         </div>
         <div class="photo-item">
           <img src="photocard4.jpg" alt="Book Collection">
-          <div class="photo-caption">Growing library of stories and knowledge</div>
+        </div>
+        <div class="photo-item">
+          <img src="photocard5.jpg" alt="Study Time">
+        </div>
+        <div class="photo-item">
+          <img src="photocard6.jpg" alt="Cycling Adventure">
         </div>
       </div>
     </section>
