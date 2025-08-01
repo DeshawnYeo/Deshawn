@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Literadia</title>
+  <style>
+    :root {
+      --primary: #1DB954;
+      --accent: #191414;
+      --light: #ffffff;
+      --dark: #191414;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+    }
+
+    header {
+      background-color: var(--accent);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .site-title {
+      color: var(--primary);
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    main {
+      padding-top: 80px;
+      background: linear-gradient(180deg, var(--dark) 0%, #2a2a2a 100%);
+    }
+
+    .profile-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .bio-content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .bio-content:hover {
+      transform: translateY(-5px);
+    }
+
+    .bio-text h1 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+    }
+
+    .bio-details {
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateX(10px);
+    }
+
+    .social-links img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .spotify-embed {
+      margin-top: 2rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .spotify-embed iframe {
+      width: 100%;
+      height: 152px;
+      border-radius: 12px;
+    }
+
+    .container {
+      perspective: 1000px;
+    }
+
+    .photocard {
+      width: 240px;
+      height: 360px;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transform-style: preserve-3d;
+      transition: transform 0.05s linear;
+      cursor: grab;
+    }
+
+    .photocard img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-gallery {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .photo-gallery h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .photo-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .photo-item {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .photo-caption {
+      padding: 1rem;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--light);
+    }
+
+    @media (max-width: 768px) {
+      .bio-content {
+        grid-template-columns: 1fr;
+      }
+
+      .photocard {
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <span class="site-title">Deshawn</span>
+      <div class="nav-links">
+        <a href="#bio" class="nav-link">Bio</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#photo" class="nav-link">Photo</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="bio" class="profile-section">
+      <div class="bio-content">
+        <div class="bio-text">
+          <h1>Deshawn Yeovanes</h1>
+          <p class="bio-details">
+            Seorang Book Enthusiast & Founder Literadia<br>
+            Lahir: Batam, 22 Maret 2010<br>
+            Hobi: Membaca, Bersepeda, Berlari<br>
+            Motto: "Membaca adalah jendela dunia"
+          </p>
+
+          <div class="social-links" id="contact">
+            <a href="mailto:deshawnyeo1890@gmail.com">
+              <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> Email
+            </a>
+            <a href="https://www.instagram.com/deshawn_yeovanes?igsh=MTkwMWozcXV0amcz" target="_blank">
+              <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"> Instagram
+            </a>
+            <a href="https://wa.me/6282382052250" target="_blank">
+              <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"> WhatsApp
+            </a>
+          </div>
+
+          <div class="spotify-embed">
+            <iframe src="https://open.spotify.com/embed/playlist/0SFHiEDaLo5E7KUTCxH2tZ?utm_source=generator"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <!-- Photocard in same box -->
+        <div class="container">
+          <div class="photocard" id="photocard3D">
+            <img src="photocard1.jpg" alt="Deshawn Photocard">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="photo" class="photo-gallery">
+      <h2>Photo Gallery</h2>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="photocard1.jpg" alt="Reading Journey">
+          <div class="photo-caption">Started my reading adventure at age 5 with fairy tales</div>
+        </div>
+        <div class="photo-item">
+          <img src="photocard2.jpg" alt="Favorite Genre">
+          <div class="photo-caption">Mystery and Fantasy books have my heart</div>
+        </div>
+        <div class="photo-item">
+          <img src="photocard3.jpg" alt="Reading Corner">
+          <div class="photo-caption">My cozy spot for endless adventures</div>
+        </div>
+        <div class="photo-item">
+          <img src="photocard4.jpg" alt="Book Collection">
+          <div class="photo-caption">Growing library of stories and knowledge</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Photocard drag rotate
+    const card = document.getElementById("photocard3D");
+
+    let isDragging = false;
+    let lastX = 0;
+    let lastY = 0;
+    let rotateX = 0;
+    let rotateY = 0;
+
+    card.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+
+    document.addEventListener("mouseup", () => isDragging = false);
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastX;
+      const deltaY = e.clientY - lastY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+
+    card.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    });
+
+    card.addEventListener("touchend", () => isDragging = false);
+
+    card.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const touchX = e.touches[0].clientX;
+      const touchY = e.touches[0].clientY;
+      const deltaX = touchX - lastX;
+      const deltaY = touchY - lastY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      lastX = touchX;
+      lastY = touchY;
+    });
+  </script>
+</body>
+</html>
