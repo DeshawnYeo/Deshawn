@@ -566,6 +566,138 @@ padding: 10px;
     padding: 0.7rem 1rem;
   }
 }
+
+      .shop-section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.06);
+      border-radius: 25px;
+      box-shadow: 0 12px 32px rgba(220, 20, 60, 0.07);
+      margin-bottom: 3rem;
+    }
+
+    .shop-section h2 {
+      color: #DC143C;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .shop-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      justify-items: center;
+    }
+
+    .shop-item {
+      background: rgba(255,255,255,0.08);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(220,20,60,0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+
+    .shop-item:hover {
+      box-shadow: 0 20px 40px rgba(220,20,60,0.12);
+    }
+
+    .shop-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 16px;
+      object-fit: cover;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(29,185,84,0.09);
+      margin-bottom: 1.2rem;
+      transition: transform 0.2s;
+    }
+    .shop-photo:hover {
+      transform: scale(1.04);
+    }
+
+    .shop-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--crimson);
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .shop-price {
+      font-size: 1.05rem;
+      color: #2C2C2C;
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+    .shop-desc {
+      font-size: 0.98rem;
+      color: #2C2C2C;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    /* Shop Lightbox */
+    .shop-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.94);
+      align-items: center;
+      justify-content: center;
+    }
+    .shop-lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(220,20,60,0.22);
+      display: block;
+      margin: auto;
+    }
+    .shop-lightbox-close {
+      position: absolute;
+      top: 28px;
+      right: 38px;
+      font-size: 2.5rem;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .shop-lightbox-close:hover {
+      color: #DC143C;
+    }
+
+    @media (max-width: 768px) {
+      .shop-section {
+        padding: 2rem 0.5rem;
+      }
+      .shop-item {
+        padding: 1.2rem;
+      }
+      .shop-photo {
+        width: 130px;
+        height: 130px;
+      }
+    }
+    @media (max-width: 480px) {
+      .shop-section h2 {
+        font-size: 1.3rem;
+      }
+      .shop-name {
+        font-size: 1rem;
+      }
+      .shop-photo {
+        width: 100px;
+        height: 100px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -575,6 +707,7 @@ padding: 10px;
       <div class="nav-links">
         <a href="#bio" class="nav-link">Bio</a>
         <a href="#achievements" class="nav-link">Achievements</a>
+        <a href="#Shops" class="nav-link">Shops</a>
         <a href="#contact" class="nav-link">Contact</a>
         <a href="#photo" class="nav-link">Gallery</a>
         <a href="#commentary" class="nav-link">Commentary</a>
@@ -664,6 +797,32 @@ padding: 10px;
       </div>
     </section>
          -->
+
+    <section id="shop" class="shop-section">
+      <h2>Shop</h2>
+      <div class="shop-grid">
+        <!-- Example Product 1 -->
+        <div class="shop-item">
+          <img src="shop-product-01.jpg" alt="Product 1" class="shop-photo" onclick="openShopLightbox('shop-product-01.jpg')">
+          <div class="shop-name">Deshawn Keychain</div>
+          <div class="shop-price">Rp 25.000</div>
+          <div class="shop-desc">DM me to order via WhatsApp or Instagram!</div>
+        </div>
+        <!-- Example Product 2 -->
+        <div class="shop-item">
+          <img src="shop-product-02.jpg" alt="Product 2" class="shop-photo" onclick="openShopLightbox('shop-product-02.jpg')">
+          <div class="shop-name">Custom Photocard</div>
+          <div class="shop-price">Rp 15.000</div>
+          <div class="shop-desc">DM me to order via WhatsApp or Instagram!</div>
+        </div>
+        <!-- Add more products below as needed using the same structure -->
+      </div>
+      <!-- Shop Lightbox -->
+      <div class="shop-lightbox" id="shopLightbox">
+        <span class="shop-lightbox-close" onclick="closeShopLightbox()">&times;</span>
+        <img id="shopLightboxImg" class="shop-lightbox-img" src="" alt="Product Full View" />
+      </div>
+    </section>
 
     <section id="photo" class="photo-gallery">
     <h2>Photo Gallery</h2>
@@ -846,6 +1005,28 @@ commentForm.addEventListener("submit", function(e) {
 });
 
 window.addEventListener("DOMContentLoaded", loadComments);
+    
+    function openShopLightbox(imgSrc) {
+      const lightbox = document.getElementById('shopLightbox');
+      const img = document.getElementById('shopLightboxImg');
+      img.src = imgSrc;
+      lightbox.style.display = 'flex';
+    }
+    function closeShopLightbox() {
+      const lightbox = document.getElementById('shopLightbox');
+      const img = document.getElementById('shopLightboxImg');
+      img.src = "";
+      lightbox.style.display = 'none';
+    }
+    // Click outside image closes lightbox
+    document.getElementById('shopLightbox').addEventListener('click', function(e){
+      if(e.target === this) closeShopLightbox();
+    });
+    document.addEventListener('keydown', function(e){
+      if(document.getElementById('shopLightbox').style.display === 'flex' && e.key === 'Escape'){
+        closeShopLightbox();
+      }
+    });
   </script>
 </body>
 </html>
