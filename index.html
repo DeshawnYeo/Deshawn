@@ -417,6 +417,53 @@
         font-size: 1.5rem;
       }
     }
+
+     /* Lightbox CSS */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 20px;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 20px;
+      z-index: 10000;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2.5rem;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
   </style>
 </head>
 <body>
@@ -510,29 +557,23 @@
     </section>
 
     <section id="photo" class="photo-gallery">
-      <h2>Photo Gallery</h2>
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="IMG20250625174443.jpg">
-        </div>
-        <div class="photo-item">
-          <img src="IMG20250621182925.jpg">
-        </div>
-        <div class="photo-item">
-          <img src="IMG20240505170656.jpg">
-        </div>
-        <div class="photo-item">
-          <img src="IMG_20250802_093315.jpg">
-        </div>
-        <div class="photo-item">
-          <img src="photocard5.jpg" alt="Study Time">
-        </div>
-        <div class="photo-item">
-          <img src="photocard6.jpg" alt="Cycling Adventure">
-        </div>
-      </div>
-    </section>
-  </main>
+    <h2>Photo Gallery</h2>
+    <div class="photo-grid" id="gallery">
+      <div class="photo-item"><img src="IMG20250625174443.jpg"></div>
+      <div class="photo-item"><img src="IMG20250621182925.jpg"></div>
+      <div class="photo-item"><img src="IMG20240505170656.jpg"></div>
+      <div class="photo-item"><img src="IMG_20250802_093315.jpg"></div>
+      <div class="photo-item"><img src="photocard5.jpg" alt="Study Time"></div>
+      <div class="photo-item"><img src="photocard6.jpg" alt="Cycling Adventure"></div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <button class="nav-btn prev" onclick="prevImage()">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Full View" />
+    <button class="nav-btn next" onclick="nextImage()">&#10095;</button>
+  </div>
 
   <script>
     // Smooth scroll
@@ -592,6 +633,45 @@
       card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       lastX = touchX;
       lastY = touchY;
+    });
+
+     const galleryImages = document.querySelectorAll("#gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    let currentIndex = 0;
+
+    galleryImages.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        currentIndex = index;
+        showLightbox();
+      });
+    });
+
+    function showLightbox() {
+      lightbox.style.display = "flex";
+      lightboxImg.src = galleryImages[currentIndex].src;
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showLightbox();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showLightbox();
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.style.display === "flex") {
+        if (e.key === "ArrowRight") nextImage();
+        if (e.key === "ArrowLeft") prevImage();
+        if (e.key === "Escape") closeLightbox();
+      }
     });
   </script>
 </body>
