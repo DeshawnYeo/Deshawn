@@ -598,6 +598,44 @@ padding: 10px;
         height: 100px;
       }
     }
+    /* Glass Preorder Box */
+    .preorder-glass-box {
+      margin: 0 auto 2rem auto;
+      max-width: 420px;
+      padding: 1rem 2rem;
+      background: rgba(255,255,255,0.16);
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgba(220, 20, 60, 0.12), 0 1.5px 0 rgba(255,255,255,0.3) inset;
+      border: 1.5px solid rgba(220, 20, 60, 0.18);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      text-align: center;
+      position: relative;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #DC143C;
+      letter-spacing: 0.5px;
+    }
+    .preorder-glass-box .preorder-text {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1.08rem;
+      color: #DC143C;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.23), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    @media (max-width: 768px) {
+      .preorder-glass-box {
+        max-width: 98%;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .preorder-glass-box {
+        font-size: 0.93rem;
+        padding: 0.5rem 0.7rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -696,6 +734,9 @@ padding: 10px;
 
     <section id="shop" class="shop-section">
       <h2>Shop</h2>
+      <div class="preorder-glass-box">
+        <span class="preorder-text">🛒 <strong>Open Pre-order until 10 August!</strong></span>
+      </div>
       <div class="shop-grid">
         <!-- Example Product 1 -->
         <div class="shop-item">
