@@ -442,11 +442,26 @@
   align-items: center;
 }
 
+
+/* Shop Lightbox - FIXED CSS */
+.shop-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
 .shop-lightbox-img {
   max-width: 90%;
   max-height: 80%;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(220,20,60,0.22);
+  box-shadow: 0 10px 40px rgba(220, 20, 60, 0.22);
   object-fit: contain;
 }
 
@@ -460,16 +475,12 @@
   z-index: 10000;
   font-weight: bold;
   transition: color 0.2s;
+  user-select: none;
 }
 
 .shop-lightbox-close:hover {
   color: #DC143C;
-}-block;
-      vertical-align: middle;
-      font-size: 1.08rem;
-      color: #FFFFFF;
-      text-shadow: 0 1px 4px rgba(255,255,255,0.23), 0 1px 2px rgba(0,0,0,0.04);
-    }
+}
 
     
     /* Gallery Lightbox */
