@@ -442,26 +442,11 @@
   align-items: center;
 }
 
-
-/* Shop Lightbox - FIXED CSS */
-.shop-lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  justify-content: center;
-  align-items: center;
-}
-
 .shop-lightbox-img {
   max-width: 90%;
   max-height: 80%;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(220, 20, 60, 0.22);
+  box-shadow: 0 10px 40px rgba(220,20,60,0.22);
   object-fit: contain;
 }
 
@@ -475,12 +460,16 @@
   z-index: 10000;
   font-weight: bold;
   transition: color 0.2s;
-  user-select: none;
 }
 
 .shop-lightbox-close:hover {
   color: #DC143C;
-}
+}-block;
+      vertical-align: middle;
+      font-size: 1.08rem;
+      color: #FFFFFF;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.23), 0 1px 2px rgba(0,0,0,0.04);
+    }
 
     
     /* Gallery Lightbox */
@@ -797,12 +786,7 @@
           <div class="shop-desc">DM me to order via WhatsApp or Instagram!</div>
         </div>
       </div>
-      <!-- Shop Lightbox -->
-      <div class="shop-lightbox" id="shopLightbox">
-        <span class="shop-lightbox-close" onclick="closeShopLightbox()">&times;</span>
-        <img id="shopLightboxImg" class="shop-lightbox-img" src="" alt="Product Full View" />
-      </div>
-    </section>
+      </section>
 
     <section id="photo" class="photo-gallery">
       <h2>Photo Gallery</h2>
@@ -822,150 +806,78 @@
     </div>
 
     <script>
-      // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
+  let shopMode = false;
+  const galleryImages = Array.from(document.querySelectorAll('.photo-grid img'));
+  let currentIndex = 0;
 
-// Shop Lightbox Functions - FIXED
-function openShopLightbox(src) {
-  console.log('Opening shop lightbox with:', src); // Debug log
-  const lightbox = document.getElementById('shopLightbox');
-  const img = document.getElementById('shopLightboxImg');
-  
-  if (lightbox && img) {
-    img.src = src;
-    lightbox.style.display = 'flex';
-    // Prevent body scrolling when lightbox is open
-    document.body.style.overflow = 'hidden';
+  // --- Buka Lightbox Gallery ---
+  function openLightbox(idx) {
+    shopMode = false; // mode gallery
+    currentIndex = idx;
+    document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
+    document.getElementById('lightbox').style.display = 'flex';
+
+    // tampilkan tombol navigasi
+    document.querySelectorAll('.prev, .next').forEach(btn => btn.style.display = 'block');
   }
-}
 
-function closeShopLightbox() {
-  console.log('Closing shop lightbox'); // Debug log
-  const lightbox = document.getElementById('shopLightbox');
-  const img = document.getElementById('shopLightboxImg');
-  
-  if (lightbox && img) {
-    lightbox.style.display = 'none';
-    img.src = '';
-    // Restore body scrolling
-    document.body.style.overflow = 'auto';
+  // --- Buka Lightbox Shop ---
+  function openShopLightbox(src) {
+    shopMode = true; // mode shop
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+
+    // sembunyikan tombol navigasi
+    document.querySelectorAll('.prev, .next').forEach(btn => btn.style.display = 'none');
   }
-}
 
-// Gallery Lightbox Functions
-const galleryImages = Array.from(document.querySelectorAll('.photo-grid img'));
-let currentIndex = 0;
-
-galleryImages.forEach((img, i) => {
-  img.addEventListener('click', () => {
-    openLightbox(i);
-  });
-});
-
-function openLightbox(idx) {
-  currentIndex = idx;
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  
-  if (lightbox && img) {
-    img.src = galleryImages[currentIndex].src;
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+  // --- Tutup Lightbox ---
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.getElementById('lightbox-img').src = '';
+    shopMode = false;
   }
-}
 
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  
-  if (lightbox && img) {
-    lightbox.style.display = 'none';
-    img.src = '';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-function prevImage() {
-  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-  const img = document.getElementById('lightbox-img');
-  if (img) {
-    img.src = galleryImages[currentIndex].src;
-  }
-}
-
-function nextImage() {
-  currentIndex = (currentIndex + 1) % galleryImages.length;
-  const img = document.getElementById('lightbox-img');
-  if (img) {
-    img.src = galleryImages[currentIndex].src;
-  }
-}
-
-// Keyboard navigation for gallery and lightbox closing
-document.addEventListener('keydown', function(e) {
-  const lightbox = document.getElementById('lightbox');
-  const shopLightbox = document.getElementById('shopLightbox');
-  
-  // Gallery lightbox keyboard controls
-  if (lightbox && lightbox.style.display === 'flex') {
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-      e.preventDefault();
-      prevImage();
-    } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-      e.preventDefault();
-      nextImage();
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      closeLightbox();
+  // --- Navigasi Gallery ---
+  function prevImage() {
+    if (!shopMode) { // hanya untuk gallery
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
     }
   }
-  
-  // Shop lightbox keyboard controls (Escape to close only)
-  if (shopLightbox && shopLightbox.style.display === 'flex' && e.key === 'Escape') {
-    e.preventDefault();
-    closeShopLightbox();
-  }
-});
 
-// Click outside to close lightboxes
-document.addEventListener('click', function(e) {
-  const lightbox = document.getElementById('lightbox');
-  const shopLightbox = document.getElementById('shopLightbox');
-  
-  // Close gallery lightbox if clicking outside the image
-  if (lightbox && lightbox.style.display === 'flex' && e.target === lightbox) {
-    closeLightbox();
+  function nextImage() {
+    if (!shopMode) { // hanya untuk gallery
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
+    }
   }
-  
-  // Close shop lightbox if clicking outside the image
-  if (shopLightbox && shopLightbox.style.display === 'flex' && e.target === shopLightbox) {
-    closeShopLightbox();
-  }
-});
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, lightbox functions ready');
-  
-  // Test if all required elements exist
-  const shopLightbox = document.getElementById('shopLightbox');
-  const shopImg = document.getElementById('shopLightboxImg');
-  const galleryLightbox = document.getElementById('lightbox');
-  const galleryImg = document.getElementById('lightbox-img');
-  
-  if (!shopLightbox) console.error('Shop lightbox element not found');
-  if (!shopImg) console.error('Shop lightbox image not found');
-  if (!galleryLightbox) console.error('Gallery lightbox element not found');
-  if (!galleryImg) console.error('Gallery lightbox image not found');
-});
-    </script>
+  // --- Klik Gambar Gallery ---
+  galleryImages.forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  // --- Navigasi Keyboard ---
+  document.addEventListener('keydown', function(e) {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.style.display === 'flex') {
+      if (!shopMode) { // navigasi hanya di gallery
+        if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          prevImage();
+        } else if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
+          e.preventDefault();
+          nextImage();
+        }
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      }
+    }
+  });
+</script>
   </main>
 </body>
 </html>
