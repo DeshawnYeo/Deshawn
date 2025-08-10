@@ -438,16 +438,16 @@
 
     /* Shop Lightbox - FIXED */
     .shop-lightbox {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.94);
-      align-items: center;
-      justify-content: center;
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.94);
+  align-items: center;
+  justify-content: center;
     }
     
     .shop-lightbox-img {
@@ -828,8 +828,9 @@
 
       // Shop Lightbox
       function openShopLightbox(src) {
-        document.getElementById('shopLightboxImg').src = src;
-        document.getElementById('shopLightbox').style.display = 'flex';
+  document.getElementById('shopLightboxImg').src = src;
+  const lightbox = document.getElementById('shopLightbox');
+  lightbox.style.display = 'flex'; // This was already correct
       }
       function closeShopLightbox() {
         document.getElementById('shopLightbox').style.display = 'none';
@@ -866,6 +867,31 @@
         currentIndex = (currentIndex + 1) % galleryImages.length;
         document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
       }
+      // Keyboard navigation for gallery
+document.addEventListener('keydown', function(e) {
+  const lightbox = document.getElementById('lightbox');
+  const shopLightbox = document.getElementById('shopLightbox');
+  
+  // Only work if gallery lightbox is open (not shop lightbox)
+  if (lightbox.style.display === 'flex' && shopLightbox.style.display !== 'flex') {
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+      e.preventDefault();
+      prevImage();
+    } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+      e.preventDefault();
+      nextImage();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeLightbox();
+    }
+  }
+  
+  // Close shop lightbox with Escape
+  if (shopLightbox.style.display === 'flex' && e.key === 'Escape') {
+    e.preventDefault();
+    closeShopLightbox();
+  }
+});
     </script>
   </main>
 </body>
