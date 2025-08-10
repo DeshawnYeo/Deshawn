@@ -402,21 +402,128 @@ padding: 10px;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       }
     }
-.shop-item {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
+.shop-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* This is the new glass box for the entire shop area */
+.shop-glassbox {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border-radius: 25px;
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.09), 0 1.5px 0 rgba(255,255,255,0.10) inset;
+  border: 2px solid rgba(255,255,255,0.13);
+  padding: 2.5rem 1.5rem;
+}
+
+/* Shop grid stays the same but remove extra backgrounds */
+.shop-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  justify-items: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+/* Make shop item simple, just card-like */
+.shop-item {
+  background: rgba(255,255,255,0.11);
+  padding: 1.2rem 1rem 1.7rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(220, 20, 60, 0.11);
+  border: 1px solid rgba(220, 20, 60, 0.09);
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
+.shop-item:hover {
+  transform: translateY(-7px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(220,20,60,0.14);
+}
+
+/* Remove price badge, just regular text */
+.shop-price {
+  font-size: 1.05rem;
+  color: #2C2C2C;
+  margin-bottom: 0.6rem;
+  text-align: center;
+  font-weight: 600;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.shop-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--crimson);
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+.shop-desc {
+  font-size: 0.98rem;
+  color: #2C2C2C;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.shop-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(29,185,84,0.09);
+  margin-bottom: 1.2rem;
+  transition: transform 0.2s;
+}
+.shop-photo:hover {
+  transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+  .shop-section {
+    padding: 2rem 0.5rem;
+  }
+  .shop-glassbox {
+    padding: 1.7rem 0.6rem;
+  }
+  .shop-item {
+    padding: 1rem;
+  }
+  .shop-photo {
+    width: 130px;
+    height: 130px;
+  }
+}
+@media (max-width: 480px) {
+  .shop-section h2 {
+    font-size: 1.3rem;
+  }
+  .shop-name {
+    font-size: 1rem;
+  }
+  .shop-photo {
+    width: 100px;
+    height: 100px;
+  }
+}
 .shop-item:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
