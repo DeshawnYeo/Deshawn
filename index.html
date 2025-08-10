@@ -429,54 +429,49 @@
     }
 
     .preorder-glass-box .preorder-text {
-      display: inline-block;
+      display: inline.shop-lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-lightbox-img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(220,20,60,0.22);
+  object-fit: contain;
+}
+
+.shop-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.shop-lightbox-close:hover {
+  color: #DC143C;
+}-block;
       vertical-align: middle;
       font-size: 1.08rem;
       color: #FFFFFF;
       text-shadow: 0 1px 4px rgba(255,255,255,0.23), 0 1px 2px rgba(0,0,0,0.04);
     }
 
-    /* Shop Lightbox - FIXED */
-    .shop-lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.94);
-  align-items: center;
-  justify-content: center;
-    }
     
-    .shop-lightbox-img {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(220,20,60,0.22);
-      display: block;
-      margin: auto;
-      object-fit: contain;
-    }
-    
-    .shop-lightbox-close {
-      position: absolute;
-      top: 28px;
-      right: 38px;
-      font-size: 2.5rem;
-      color: white;
-      cursor: pointer;
-      z-index: 10000;
-      font-weight: bold;
-      transition: color 0.2s;
-      user-select: none;
-    }
-    
-    .shop-lightbox-close:hover {
-      color: #DC143C;
-    }
-
     /* Gallery Lightbox */
     .lightbox {
       display: none;
@@ -825,17 +820,16 @@
           });
         });
       });
-
-      // Shop Lightbox
-      function openShopLightbox(src) {
+function openShopLightbox(src) {
   document.getElementById('shopLightboxImg').src = src;
-  const lightbox = document.getElementById('shopLightbox');
-  lightbox.style.display = 'flex'; // This was already correct
-      }
-      function closeShopLightbox() {
-        document.getElementById('shopLightbox').style.display = 'none';
-        document.getElementById('shopLightboxImg').src = '';
-      }
+  document.getElementById('shopLightbox').style.display = 'flex';
+}
+
+function closeShopLightbox() {
+  document.getElementById('shopLightbox').style.display = 'none';
+  document.getElementById('shopLightboxImg').src = '';
+}
+      
 
       // Gallery Lightbox
       const galleryImages = Array.from(document.querySelectorAll('.photo-grid img'));
