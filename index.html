@@ -812,62 +812,98 @@
 
     <script>
       // Smooth scroll
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Shop Lightbox Functions - FIXED
 function openShopLightbox(src) {
-  document.getElementById('shopLightboxImg').src = src;
-  document.getElementById('shopLightbox').style.display = 'flex';
+  console.log('Opening shop lightbox with:', src); // Debug log
+  const lightbox = document.getElementById('shopLightbox');
+  const img = document.getElementById('shopLightboxImg');
+  
+  if (lightbox && img) {
+    img.src = src;
+    lightbox.style.display = 'flex';
+    // Prevent body scrolling when lightbox is open
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeShopLightbox() {
-  document.getElementById('shopLightbox').style.display = 'none';
-  document.getElementById('shopLightboxImg').src = '';
+  console.log('Closing shop lightbox'); // Debug log
+  const lightbox = document.getElementById('shopLightbox');
+  const img = document.getElementById('shopLightboxImg');
+  
+  if (lightbox && img) {
+    lightbox.style.display = 'none';
+    img.src = '';
+    // Restore body scrolling
+    document.body.style.overflow = 'auto';
+  }
 }
-      
 
-      // Gallery Lightbox
-      const galleryImages = Array.from(document.querySelectorAll('.photo-grid img'));
-      let currentIndex = 0;
+// Gallery Lightbox Functions
+const galleryImages = Array.from(document.querySelectorAll('.photo-grid img'));
+let currentIndex = 0;
 
-      galleryImages.forEach((img, i) => {
-        img.addEventListener('click', () => {
-          openLightbox(i);
-        });
-      });
+galleryImages.forEach((img, i) => {
+  img.addEventListener('click', () => {
+    openLightbox(i);
+  });
+});
 
-      function openLightbox(idx) {
-        currentIndex = idx;
-        document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
-        document.getElementById('lightbox').style.display = 'flex';
-      }
+function openLightbox(idx) {
+  currentIndex = idx;
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  
+  if (lightbox && img) {
+    img.src = galleryImages[currentIndex].src;
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
 
-      function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
-        document.getElementById('lightbox-img').src = '';
-      }
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  
+  if (lightbox && img) {
+    lightbox.style.display = 'none';
+    img.src = '';
+    document.body.style.overflow = 'auto';
+  }
+}
 
-      function prevImage() {
-        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-        document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
-      }
+function prevImage() {
+  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  const img = document.getElementById('lightbox-img');
+  if (img) {
+    img.src = galleryImages[currentIndex].src;
+  }
+}
 
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % galleryImages.length;
-        document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
-      }
-      // Keyboard navigation for gallery
+function nextImage() {
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  const img = document.getElementById('lightbox-img');
+  if (img) {
+    img.src = galleryImages[currentIndex].src;
+  }
+}
+
+// Keyboard navigation for gallery and lightbox closing
 document.addEventListener('keydown', function(e) {
   const lightbox = document.getElementById('lightbox');
   const shopLightbox = document.getElementById('shopLightbox');
   
-  // Only work if gallery lightbox is open (not shop lightbox)
-  if (lightbox.style.display === 'flex' && shopLightbox.style.display !== 'flex') {
+  // Gallery lightbox keyboard controls
+  if (lightbox && lightbox.style.display === 'flex') {
     if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
       e.preventDefault();
       prevImage();
@@ -880,11 +916,43 @@ document.addEventListener('keydown', function(e) {
     }
   }
   
-  // Close shop lightbox with Escape
-  if (shopLightbox.style.display === 'flex' && e.key === 'Escape') {
+  // Shop lightbox keyboard controls (Escape to close only)
+  if (shopLightbox && shopLightbox.style.display === 'flex' && e.key === 'Escape') {
     e.preventDefault();
     closeShopLightbox();
   }
+});
+
+// Click outside to close lightboxes
+document.addEventListener('click', function(e) {
+  const lightbox = document.getElementById('lightbox');
+  const shopLightbox = document.getElementById('shopLightbox');
+  
+  // Close gallery lightbox if clicking outside the image
+  if (lightbox && lightbox.style.display === 'flex' && e.target === lightbox) {
+    closeLightbox();
+  }
+  
+  // Close shop lightbox if clicking outside the image
+  if (shopLightbox && shopLightbox.style.display === 'flex' && e.target === shopLightbox) {
+    closeShopLightbox();
+  }
+});
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Page loaded, lightbox functions ready');
+  
+  // Test if all required elements exist
+  const shopLightbox = document.getElementById('shopLightbox');
+  const shopImg = document.getElementById('shopLightboxImg');
+  const galleryLightbox = document.getElementById('lightbox');
+  const galleryImg = document.getElementById('lightbox-img');
+  
+  if (!shopLightbox) console.error('Shop lightbox element not found');
+  if (!shopImg) console.error('Shop lightbox image not found');
+  if (!galleryLightbox) console.error('Gallery lightbox element not found');
+  if (!galleryImg) console.error('Gallery lightbox image not found');
 });
     </script>
   </main>
