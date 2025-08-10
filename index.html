@@ -812,22 +812,18 @@
 
   // --- Buka Lightbox Gallery ---
   function openLightbox(idx) {
-    shopMode = false; // mode gallery
+    shopMode = false;
     currentIndex = idx;
     document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
     document.getElementById('lightbox').style.display = 'flex';
-
-    // tampilkan tombol navigasi
     document.querySelectorAll('.prev, .next').forEach(btn => btn.style.display = 'block');
   }
 
   // --- Buka Lightbox Shop ---
   function openShopLightbox(src) {
-    shopMode = true; // mode shop
+    shopMode = true;
     document.getElementById('lightbox-img').src = src;
     document.getElementById('lightbox').style.display = 'flex';
-
-    // sembunyikan tombol navigasi
     document.querySelectorAll('.prev, .next').forEach(btn => btn.style.display = 'none');
   }
 
@@ -840,14 +836,14 @@
 
   // --- Navigasi Gallery ---
   function prevImage() {
-    if (!shopMode) { // hanya untuk gallery
+    if (!shopMode) {
       currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
       document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
     }
   }
 
   function nextImage() {
-    if (!shopMode) { // hanya untuk gallery
+    if (!shopMode) {
       currentIndex = (currentIndex + 1) % galleryImages.length;
       document.getElementById('lightbox-img').src = galleryImages[currentIndex].src;
     }
@@ -862,7 +858,7 @@
   document.addEventListener('keydown', function(e) {
     const lightbox = document.getElementById('lightbox');
     if (lightbox.style.display === 'flex') {
-      if (!shopMode) { // navigasi hanya di gallery
+      if (!shopMode) {
         if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
           e.preventDefault();
           prevImage();
@@ -877,7 +873,15 @@
       }
     }
   });
-</script>
+
+  // --- Klik area hitam untuk close ---
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    // jika klik bukan di gambar, maka close
+    if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
+      closeLightbox();
+    }
+  });
+    </script>
   </main>
 </body>
 </html>
