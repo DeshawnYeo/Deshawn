@@ -880,28 +880,64 @@
       closeLightbox();
     }
   });
-      const photocard = document.getElementById('photocard3D');
-let isMouseDown = false;
+          // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
 
-photocard.addEventListener('mousemove', (e) => {
-if (isMouseDown) {
-const rect = photocard.getBoundingClientRect();
-const x = e.clientX - rect.left; // posisi X dalam kotak
-const y = e.clientY - rect.top;  // posisi Y dalam kotak
+    // Photocard drag rotate
+    const card = document.getElementById("photocard3D");
 
-// Hitung rotasi berdasarkan posisi mouse  
-const rotateY = ((x / rect.width) - 0.5) * 360;   
-const rotateX = ((y / rect.height) - 0.5) * -360;  
+    let isDragging = false;
+    let lastX = 0;
+    let lastY = 0;
+    let rotateX = 0;
+    let rotateY = 0;
 
-photocard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    card.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
 
-}
-});
+    document.addEventListener("mouseup", () => isDragging = false);
 
-photocard.addEventListener('mousedown', () => isMouseDown = true);
-photocard.addEventListener('mouseup', () => isMouseDown = false);
-photocard.addEventListener('mouseleave', () => isMouseDown = false);
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastX;
+      const deltaY = e.clientY - lastY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
 
+    card.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    });
+
+    card.addEventListener("touchend", () => isDragging = false);
+
+    card.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const touchX = e.touches[0].clientX;
+      const touchY = e.touches[0].clientY;
+      const deltaX = touchX - lastX;
+      const deltaY = touchY - lastY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      lastX = touchX;
+      lastY = touchY;
+    });
       
     </script>
   </main>
