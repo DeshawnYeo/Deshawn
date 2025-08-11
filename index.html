@@ -880,6 +880,29 @@
       closeLightbox();
     }
   });
+      const photocard = document.getElementById('photocard3D');
+let isMouseDown = false;
+
+photocard.addEventListener('mousemove', (e) => {
+if (isMouseDown) {
+const rect = photocard.getBoundingClientRect();
+const x = e.clientX - rect.left; // posisi X dalam kotak
+const y = e.clientY - rect.top;  // posisi Y dalam kotak
+
+// Hitung rotasi berdasarkan posisi mouse  
+const rotateY = ((x / rect.width) - 0.5) * 360;   
+const rotateX = ((y / rect.height) - 0.5) * -360;  
+
+photocard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+
+}
+});
+
+photocard.addEventListener('mousedown', () => isMouseDown = true);
+photocard.addEventListener('mouseup', () => isMouseDown = false);
+photocard.addEventListener('mouseleave', () => isMouseDown = false);
+
+      
     </script>
   </main>
 </body>
