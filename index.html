@@ -32,16 +32,16 @@
     }
 
     header {
-  background: rgba(255, 255, 255, 0.05); /* subtle white glass */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 100;
+      background: rgba(220, 20, 60, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 20px rgba(220, 20, 60, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
     }
 
     nav {
@@ -313,16 +313,18 @@
 
     /* Shop Section Styles */
     .shop-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 2rem auto 3rem auto; /* Added top margin here */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border-radius: 25px;
+      padding: 3rem 2rem;
+      padding-left: 20px;
+  padding-right: 20px;
+      max-width: 1200px;
+      margin: 0 auto 3rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
     }
     .shop-section h2 {
       color: #FFFFFF;
@@ -428,7 +430,15 @@
     }
 
     .preorder-glass-box .preorder-text {
-      display: inline.shop-lightbox {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.08rem;
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.23), 
+               0 1px 2px rgba(0,0,0,0.04);
+}
+
+.shop-lightbox {
   display: none;
   position: fixed;
   z-index: 9999;
@@ -463,12 +473,8 @@
 
 .shop-lightbox-close:hover {
   color: #DC143C;
-}-block;
-      vertical-align: middle;
-      font-size: 1.08rem;
-      color: #FFFFFF;
-      text-shadow: 0 1px 4px rgba(255,255,255,0.23), 0 1px 2px rgba(0,0,0,0.04);
-    }
+}
+
 
     
     /* Gallery Lightbox */
@@ -614,7 +620,53 @@
         font-size: 1rem;
       }
     }
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+/* Ganti CSS yang ada untuk explore button dengan ini */
 
+/* Container tombol - perbaikan untuk desktop */
+.explore-btn-container {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center;
+    width: 100%;
+    margin: 2rem auto 0 auto; /* jarak dari kotak produk */
+    grid-column: 1 / -1; /* span semua kolom grid */
+}
+
+/* Tombol glass */
+.btn-primary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 0.8rem 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    transform: translateY(-2px);
+}
+        
     @media (max-width: 480px) {
       .site-title {
         font-size: 1.3rem;
@@ -716,8 +768,8 @@
         </div>
         <div class="achievement-item">
           <span class="achievement-year">2025</span>
-          <h3>Cycling 15K</h3>
-          <p>Completed a 15K cycling in Tanjungpinang with average speed 20 km/hour.</p>
+          <h3>Cycling 10K</h3>
+          <p>Completed a 10K cycling in Tanjungpinang with average speed 16 km/hour.</p>
         </div>
       </div>
     </section>
@@ -728,7 +780,7 @@
 </div>
       </div>
       <div class="preorder-glass-box">
-        <span class="preorder-text">🛒 <strong>Open for Pre-order Until 18 August!</strong></span>
+        <span class="preorder-text">🛒 <strong>Open for Pre-order Until 19 August!</strong></span>
       </div>
       <div class="preorder-glass-box">
         <span class="preorder-text"><strong>Beli 3 Gratis 1!</strong></span>
@@ -784,6 +836,9 @@
           <div class="shop-price">Rp 60.000</div>
           <div class="shop-desc">DM me to order via WhatsApp or Instagram!</div>
         </div>
+<div class="explore-btn-container">
+    <a href="index (3).html" class="btn-primary">Explore More</a>
+</div>
       </div>
       </section>
 
@@ -880,65 +935,6 @@
       closeLightbox();
     }
   });
-          // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Photocard drag rotate
-    const card = document.getElementById("photocard3D");
-
-    let isDragging = false;
-    let lastX = 0;
-    let lastY = 0;
-    let rotateX = 0;
-    let rotateY = 0;
-
-    card.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      lastX = e.clientX;
-      lastY = e.clientY;
-    });
-
-    document.addEventListener("mouseup", () => isDragging = false);
-
-    document.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - lastX;
-      const deltaY = e.clientY - lastY;
-      rotateY += deltaX * 0.5;
-      rotateX -= deltaY * 0.5;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      lastX = e.clientX;
-      lastY = e.clientY;
-    });
-
-    card.addEventListener("touchstart", (e) => {
-      isDragging = true;
-      lastX = e.touches[0].clientX;
-      lastY = e.touches[0].clientY;
-    });
-
-    card.addEventListener("touchend", () => isDragging = false);
-
-    card.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      const touchX = e.touches[0].clientX;
-      const touchY = e.touches[0].clientY;
-      const deltaX = touchX - lastX;
-      const deltaY = touchY - lastY;
-      rotateY += deltaX * 0.5;
-      rotateX -= deltaY * 0.5;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      lastX = touchX;
-      lastY = touchY;
-    });
-      
     </script>
   </main>
 </body>
